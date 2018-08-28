@@ -2,8 +2,6 @@
 .ensime
 .gradle
 .ensime_cache
-conf/private
-bin/
 /db
 .eclipse
 /lib/

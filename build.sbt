@@ -10,11 +10,18 @@ lazy val commonSettings = Seq(
 )
 
 lazy val root = (project in file("."))
-  .configs(IntegrationTest)
+  .configs(ITest)
+  .settings( inConfig(ITest)(Defaults.testSettings) : _*)
   .settings(
     commonSettings,
-    Defaults.itSettings,
   ).enablePlugins(PlayScala)
+
+
+lazy val ITest = config("it") extend(Test)
+
+javaSource in ITest := baseDirectory.value / "/it"
+resourceDirectory in ITest := baseDirectory.value / "/it/resources"
+scalaSource in ITest := baseDirectory.value / "/it"
 
 val testDependencies = Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2",

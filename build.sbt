@@ -34,6 +34,7 @@ val testDependencies = Seq(
 libraryDependencies += guice
 libraryDependencies += jdbc
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.4"
+libraryDependencies += "org.flywaydb" %% "flyway-play" % "5.0.0"
 libraryDependencies ++= testDependencies.map(d => d % "test,it")
 
 

@@ -23,7 +23,7 @@ javaSource in ITest := baseDirectory.value / "/it"
 resourceDirectory in ITest := baseDirectory.value / "/it/resources"
 scalaSource in ITest := baseDirectory.value / "/it"
 
-val testDependencies = Seq(
+lazy val testDependencies = Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2",
   "org.mockito" % "mockito-core" % "2.7.19",
    "com.whisk" %% "docker-testkit-scalatest" % "0.9.5",
@@ -35,6 +35,8 @@ libraryDependencies += guice
 libraryDependencies += jdbc
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.4"
 libraryDependencies += "org.flywaydb" %% "flyway-play" % "5.0.0"
+libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
+
 libraryDependencies ++= testDependencies.map(d => d % "test,it")
 
 

@@ -38,6 +38,23 @@ class ArticlesControllerSpec extends PlaySpec with BeforeAndAfter with MockitoSu
   }
 
   "ArticlesController" when {
+    "calling showAllArticles" should {
+     "read all articles from db" in {
+        when(articlesRepository.selectAll()).thenReturn(Future.successful(
+        Seq(
+          ANY_ARTICLE.copy(title = "title 1"),
+          ANY_ARTICLE.copy(title = "title 2"),
+          ANY_ARTICLE.copy(title = "title 3")
+        )))
+
+        val articlePage = cut.showAllArticles().apply(FakeRequest(GET, "/"))
+
+       contentAsString(articlePage) must include ("title 1")
+       contentAsString(articlePage) must include ("title 2")
+       contentAsString(articlePage) must include ("title 3")
+     }
+    }
+
     "calling showArticle" should {
       "read article from db" in {
         when(articlesRepository.selectArticle(1)).thenReturn(Future.successful(ANY_ARTICLE))

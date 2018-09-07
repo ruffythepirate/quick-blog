@@ -1,0 +1,12 @@
+@import _root_.articles.Article
+@(articles: Seq[Article])
+
+
+@main("Articles") {
+<ul>
+  @for(article <- articles) {
+    <li>@article.title</li>
+  }
+</ul>
+}
+

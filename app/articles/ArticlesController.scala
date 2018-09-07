@@ -1,16 +1,16 @@
 package articles
 
 import com.google.inject.Inject
+import markdown.MarkdownService
 import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Request}
 
 import scala.concurrent.ExecutionContext
 
-class ArticlesController @Inject()(cc: ControllerComponents, articlesRepository: ArticlesRepository)(implicit ec: ExecutionContext) extends AbstractController(cc) {
+class ArticlesController @Inject()(cc: ControllerComponents, articlesRepository: ArticlesRepository, markdownService: MarkdownService)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
   def showArticle(articleId: Int) = Action.async { implicit request: Request[AnyContent] =>
-    articlesRepository.selectArticle(articleId).map(
-      article =>
-        Ok(views.html.articles.article(article.title, article.text))
-    )
+    articlesRepository.selectArticle(articleId)
+      .map( article => article.copy(text = markdownService.renderText(article.text)))
+      .map(article => Ok(views.html.articles.article(article.title, article.text)))
   }
 }

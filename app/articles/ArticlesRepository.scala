@@ -2,6 +2,7 @@ package articles
 
 import com.google.inject.Inject
 import play.api.db.slick.DatabaseConfigProvider
+import slick.basic.DatabaseConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -13,7 +14,7 @@ class ArticlesRepository @Inject() ( protected val dbConfigProvider: DatabaseCon
   val insertQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
 
   def insertArticle(article: Article) :Future[Article] = {
-    val dbConfig = dbConfigProvider.get
+    val dbConfig: DatabaseConfig[Nothing] = dbConfigProvider.get
 
     dbConfig.db.run(
       insertQuery += article

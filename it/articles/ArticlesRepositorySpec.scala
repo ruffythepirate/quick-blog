@@ -7,12 +7,16 @@ import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.test.Injecting
+import slick.basic.DatabaseConfig
+import util.DatabaseHelper
 
 class ArticlesRepositorySpec extends PlaySpec
   with GuiceOneAppPerSuite
   with Injecting
   with BeforeAndAfterAll
-  with ScalaFutures{
+  with ScalaFutures
+  with DatabaseHelper {
+
 
   var cut: ArticlesRepository = _
 
@@ -21,15 +25,21 @@ class ArticlesRepositorySpec extends PlaySpec
   implicit val defaultPatience =
     PatienceConfig(timeout =  Span(3, Seconds), interval = Span(5, Millis))
 
+  def dbConfig: DatabaseConfig[Nothing] = databaseConfigProvider.get
+
+  var databaseConfigProvider : DatabaseConfigProvider = _
+
+
 
   override def beforeAll() = {
     val injector = fakeApplication().injector
     cut = injector.instanceOf(classOf[ArticlesRepository])
 
-    val dbConfigProvider = injector.instanceOf(classOf[DatabaseConfigProvider])
+    databaseConfigProvider = injector.instanceOf(classOf[DatabaseConfigProvider])
+  }
 
-    System.out.println("Here is the conifig!: " + dbConfigProvider.get.config.root().unwrapped())
-
+  override def afterAll() = {
+    cleanDatabase
   }
 
   "ArticlesRepository" should {

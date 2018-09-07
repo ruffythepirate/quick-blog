@@ -51,6 +51,22 @@ class ArticlesRepositorySpec extends PlaySpec
 
       insertedArticle mustEqual readArticle
     }
+
+    "return all articles" in {
+      cleanDatabase
+
+      val allArticles = Seq(ANY_ARTICLE.copy(title = "title 1"),
+      ANY_ARTICLE.copy(title = "title 2"),
+      ANY_ARTICLE.copy(title = "title 3"))
+
+      val insertedArticles = allArticles.map(item =>
+        cut.insertArticle(item).futureValue
+      )
+
+      val readArticles = cut.selectAll().futureValue
+
+      readArticles must contain theSameElementsAs(insertedArticles)
+    }
   }
 
 }

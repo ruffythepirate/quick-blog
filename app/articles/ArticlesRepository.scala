@@ -29,4 +29,12 @@ class ArticlesRepository @Inject() ( protected val dbConfigProvider: DatabaseCon
     )
   }
 
+  def selectAll(): Future[Seq[Article]] = {
+    val dbConfig = dbConfigProvider.get
+
+    dbConfig.db.run(
+      articles.result
+    )
+  }
+
 }

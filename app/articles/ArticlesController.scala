@@ -13,4 +13,5 @@ class ArticlesController @Inject()(cc: ControllerComponents, articlesRepository:
       .map( article => article.copy(text = markdownService.renderText(article.text)))
       .map(article => Ok(views.html.articles.article(article.title, article.text)))
   }
+
 }

@@ -1,10 +1,8 @@
 package util
 
-import articles.{ArticlesQuery, ArticlesTable}
+import articles.{Article, ArticlesQuery}
 import org.scalatest.concurrent.ScalaFutures
 import slick.basic.DatabaseConfig
-
-import scala.concurrent.ExecutionContext
 
 trait DatabaseHelper extends ScalaFutures with ArticlesQuery{
    def dbConfig: DatabaseConfig[Nothing]
@@ -18,5 +16,12 @@ trait DatabaseHelper extends ScalaFutures with ArticlesQuery{
     ).futureValue
 
     System.out.println(s"Removed ${deletedArticles} articles.")
+  }
+
+  val insertQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
+  def addArticle(article:Article): Article = {
+    dbConfig.db.run(
+      insertQuery += article
+    ).futureValue
   }
 }

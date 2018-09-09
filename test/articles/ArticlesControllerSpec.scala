@@ -1,6 +1,7 @@
 package articles
 
 import markdown.MarkdownService
+import org.joda.time.DateTime
 import org.scalatest.BeforeAndAfter
 import org.scalatestplus.play.PlaySpec
 import org.scalatest.mockito.MockitoSugar
@@ -28,7 +29,7 @@ class ArticlesControllerSpec extends PlaySpec with BeforeAndAfter with MockitoSu
   var articlesRepository: ArticlesRepository = _
   var markdownService: MarkdownService = _
 
-  val ANY_ARTICLE = Article(Some(1), "title", "text")
+  var ANY_ARTICLE = Article(Some(1), "Title of article", "Text of article", Some(DateTime.now), Some(DateTime.now))
 
 
   before {

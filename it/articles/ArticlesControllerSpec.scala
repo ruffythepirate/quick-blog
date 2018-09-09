@@ -1,5 +1,6 @@
 package articles
 
+import org.joda.time.DateTime
 import org.scalatest.BeforeAndAfterAll
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
@@ -12,8 +13,8 @@ import util.DatabaseHelper
 
 class ArticlesControllerSpec extends PlaySpec with GuiceOneAppPerSuite with Injecting with BeforeAndAfterAll with HttpVerbs with DatabaseHelper {
 
-  var articleInDb = Article(None, "Title of article", "Text of article")
-
+  var articleInDb = Article(None, "Title of article", "Text of article", Some(DateTime.now), Some(DateTime.now))
+j
   def dbConfig: DatabaseConfig[Nothing] = databaseConfigProvider.get
 
   var databaseConfigProvider: DatabaseConfigProvider = _

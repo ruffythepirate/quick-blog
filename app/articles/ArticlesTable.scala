@@ -24,9 +24,9 @@ class ArticlesTable(tag: Tag)
 
   def text: Rep[String] = column[String]("text")
 
-  def updated: Rep[DateTime] = column[DateTime]("updated")
+  def updated: Rep[DateTime] = column[DateTime]("updated", O.AutoInc)
 
-  def created: Rep[DateTime] = column[DateTime]("created")
+  def created: Rep[DateTime] = column[DateTime]("created", O.AutoInc)
 
   // Every table needs a * projection with the same type as the table's type parameter
   def * : ProvenShape[Article] = (id.?, title, text, updated.?, created.?) <> (Article.tupled, Article.unapply)

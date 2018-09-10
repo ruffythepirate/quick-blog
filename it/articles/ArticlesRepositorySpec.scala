@@ -20,7 +20,7 @@ class ArticlesRepositorySpec extends PlaySpec
 
   var cut: ArticlesRepository = _
 
-  val ANY_ARTICLE = Article(None, "title", "text")
+  val ANY_ARTICLE = Article(None, "title", "text", None, None)
 
   implicit val defaultPatience =
     PatienceConfig(timeout =  Span(3, Seconds), interval = Span(5, Millis))
@@ -49,7 +49,7 @@ class ArticlesRepositorySpec extends PlaySpec
 
       val readArticle = cut.selectArticle(insertedArticle.id.get).futureValue
 
-      insertedArticle mustEqual readArticle
+      insertedArticle.copy(created = None, updated = None) mustEqual readArticle.copy(created = None, updated = None)
     }
 
     "return all articles" in {
@@ -65,8 +65,14 @@ class ArticlesRepositorySpec extends PlaySpec
 
       val readArticles = cut.selectAll().futureValue
 
-      readArticles must contain theSameElementsAs(insertedArticles)
+      compareWithoutDate(insertedArticles, readArticles)
     }
   }
 
+  def compareWithoutDate(expected: Seq[Article], actual: Seq[Article]): Unit = {
+    val neutralExpected = expected.map(a => a.copy(created = None, updated = None))
+    val neutralActual = actual.map(a => a.copy(created = None, updated = None))
+
+    neutralActual must contain theSameElementsAs(neutralExpected)
+  }
 }

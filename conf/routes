@@ -4,7 +4,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                           articles.ArticlesController.showAllArticles()
 GET     /article/:id                articles.ArticlesController.showArticle(id: Int)
 
 # Map static resources from the /public folder to the /assets URL path

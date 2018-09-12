@@ -1,0 +1,25 @@
+
+body {
+    width: 800px;
+    margin: auto;
+}
+
+.article-list {
+    margin-top: 10px;
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: grey;
+    list-style-type: none;
+}
+
+.article-item:first-child {
+    margin-top: 0px;
+}
+
+.article-item {
+    background-color: turquoise;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 15px;
+}

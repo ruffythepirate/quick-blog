@@ -3,9 +3,12 @@
 
 
 @main("Articles") {
-<ul>
+<ul class="article-list">
   @for(article <- articles) {
-    <li>@article.title</li>
+    <li class="article-item">
+      <span class="title">@article.title</span>
+
+    </li>
   }
 </ul>
 }

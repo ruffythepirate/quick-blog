@@ -26,17 +26,17 @@ class ArticlesControllerSpec extends PlaySpec with GuiceOneAppPerSuite with Inje
     articleInDb = addArticle(articleInDb)
   }
 
-  "ArticlesController.showArticle(:id) GET" when {
-    "Article exists" should {
-      "render the article" in {
-        val controller = inject[ArticlesController]
-        val home = controller.showArticle(articleInDb.id.get).apply(FakeRequest(GET, "/"))
-
-        status(home) mustBe OK
-        contentType(home) mustBe Some("text/html")
-        contentAsString(home) must include(articleInDb.title)
-        contentAsString(home) must include(articleInDb.text)
-      }
-    }
-  }
+//  "ArticlesController.showArticle(:id) GET" when {
+//    "Article exists" should {
+//      "render the article" in {
+//        val controller = inject[ArticlesController]
+//        val home = controller.showArticle(articleInDb.id.get).apply(FakeRequest(GET, "/"))
+//
+//        status(home) mustBe OK
+//        contentType(home) mustBe Some("text/html")
+//        contentAsString(home) must include(articleInDb.title)
+//        contentAsString(home) must include(articleInDb.text)
+//      }
+//    }
+//  }
 }

@@ -29,7 +29,7 @@ class ArticlesControllerSpec extends PlaySpec with BeforeAndAfter with MockitoSu
   var articlesRepository: ArticlesRepository = _
   var markdownService: MarkdownService = _
 
-  var ANY_ARTICLE = Article(Some(1), "Title of article", "Text of article", Some(DateTime.now), Some(DateTime.now))
+  var ANY_ARTICLE = ArticleViewModel(1, "Title of article", "Text of article", "author", DateTime.now)
 
 
   before {

@@ -3,17 +3,26 @@ package articles
 import com.google.inject.Inject
 import play.api.db.slick.DatabaseConfigProvider
 import slick.basic.DatabaseConfig
+import users.{User, UsersQuery}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class ArticlesRepository @Inject() ( protected val dbConfigProvider: DatabaseConfigProvider)
-                                   (implicit ec: ExecutionContext)
-  extends ArticlesQuery {
+class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
+                                  (implicit ec: ExecutionContext)
+  extends ArticlesQuery with UsersQuery {
 
   import slick.jdbc.PostgresProfile.api._
-  val insertQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
 
-  def insertArticle(article: Article) :Future[Article] = {
+  val insertQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
+  val selectQuery =       for {
+        (a, u) <- articles join users on (_.userId === _.id)
+      } yield (a, u)
+
+  def selectMapping(article: Article, user: User) = {
+    ArticleViewModel(article.id.get, article.title, article.text, user.name, article.created.get)
+  }
+
+  def insertArticle(article: Article): Future[Article] = {
     val dbConfig: DatabaseConfig[Nothing] = dbConfigProvider.get
 
     dbConfig.db.run(
@@ -21,20 +30,22 @@ class ArticlesRepository @Inject() ( protected val dbConfigProvider: DatabaseCon
     )
   }
 
-  def selectArticle(id: Int): Future[Article] = {
-     val dbConfig = dbConfigProvider.get
-
-    dbConfig.db.run(
-      articles.filter(_.id === id).result.head
-    )
-  }
-
-  def selectAll(): Future[Seq[Article]] = {
+  def selectArticle(id: Int): Future[ArticleViewModel] = {
     val dbConfig = dbConfigProvider.get
 
+
     dbConfig.db.run(
-      articles.result
-    )
+      selectQuery.result.head
+    ).map { case (article: Article, user: User) => selectMapping(article, user) }
+  }
+
+  def selectAll(): Future[Seq[ArticleViewModel]] = {
+    val dbConfig = dbConfigProvider.get
+
+
+   dbConfig.db.run(
+      selectQuery.result
+    ).map(result => result.map{case(article:Article, user:User)=>selectMapping(article, user)})
   }
 
 }

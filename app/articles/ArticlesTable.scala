@@ -6,9 +6,6 @@ import org.joda.time.DateTime
 import slick.lifted.ProvenShape
 import slick.jdbc.PostgresProfile.api._
 
-
-case class Article(id: Option[Int], title: String, text: String, updated: Option[DateTime], created: Option[DateTime])
-
 class ArticlesTable(tag: Tag)
   extends Table[Article](tag, "articles") {
 
@@ -23,6 +20,8 @@ class ArticlesTable(tag: Tag)
   def title: Rep[String] = column[String]("title")
 
   def text: Rep[String] = column[String]("text")
+
+  def userId: Rep[Int] = column[Int]("fk_user")
 
   def updated: Rep[DateTime] = column[DateTime]("updated", O.AutoInc)
 

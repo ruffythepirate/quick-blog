@@ -5,11 +5,8 @@
 @main("Articles") {
 <ul class="article-list">
   @for(article <- articles) {
-    <li class="article-item">
-      <span class="title">@article.title</span>
-
-    </li>
-  }
+      @snippets.articleItem(article)
+ }
 </ul>
 }
 

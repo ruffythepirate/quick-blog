@@ -1,0 +1,9 @@
+@import _root_.articles.ArticleViewModel
+
+@(article: ArticleViewModel)
+<li class="article-item">
+    <span class="title">@article.title</span>
+    <span class="time">@article.created.toString("YYYY-MM-dd")</span>
+    <span class="author">@article.title</span>
+</li>
+

@@ -23,12 +23,12 @@ class ArticlesTable(tag: Tag)
 
   def userId: Rep[Int] = column[Int]("fk_user")
 
-  def updated: Rep[DateTime] = column[DateTime]("updated", O.AutoInc)
+  def updated: Rep[DateTime] = column[DateTime]("updated")
 
-  def created: Rep[DateTime] = column[DateTime]("created", O.AutoInc)
+  def created: Rep[DateTime] = column[DateTime]("created")
 
   // Every table needs a * projection with the same type as the table's type parameter
-  def * : ProvenShape[Article] = (id.?, title, text, updated.?, created.?) <> (Article.tupled, Article.unapply)
+  def * : ProvenShape[Article] = (id.?, title, text, userId.?, updated.?, created.?) <> (Article.tupled, Article.unapply)
 }
 
 trait ArticlesQuery {

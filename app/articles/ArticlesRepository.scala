@@ -1,6 +1,7 @@
 package articles
 
 import com.google.inject.Inject
+import org.joda.time.DateTime
 import play.api.db.slick.DatabaseConfigProvider
 import slick.basic.DatabaseConfig
 import users.{User, UsersQuery}
@@ -19,14 +20,14 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
       } yield (a, u)
 
   def selectMapping(article: Article, user: User) = {
-    ArticleViewModel(article.id.get, article.title, article.text, user.name, article.created.get)
+    article.toViewModel(user)
   }
 
   def insertArticle(article: Article): Future[Article] = {
     val dbConfig: DatabaseConfig[Nothing] = dbConfigProvider.get
 
     dbConfig.db.run(
-      insertQuery += article
+      insertQuery += article.copy(created = Some(DateTime.now), updated = Some(DateTime.now))
     )
   }
 
@@ -35,7 +36,7 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
 
 
     dbConfig.db.run(
-      selectQuery.result.head
+      selectQuery.filter{case (article,_) => article.id === id}.result.head
     ).map { case (article: Article, user: User) => selectMapping(article, user) }
   }
 

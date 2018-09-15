@@ -3,8 +3,9 @@ package util
 import articles.{Article, ArticlesQuery}
 import org.scalatest.concurrent.ScalaFutures
 import slick.basic.DatabaseConfig
+import users.{User, UsersQuery}
 
-trait DatabaseHelper extends ScalaFutures with ArticlesQuery{
+trait DatabaseHelper extends ScalaFutures with ArticlesQuery with UsersQuery{
    def dbConfig: DatabaseConfig[Nothing]
 
   import slick.jdbc.PostgresProfile.api._
@@ -18,10 +19,17 @@ trait DatabaseHelper extends ScalaFutures with ArticlesQuery{
     System.out.println(s"Removed ${deletedArticles} articles.")
   }
 
-  val insertQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
+  private val insertUserQuery = users returning users.map(_.id) into ((item, id) => item.copy(id = Some(id)))
+  def addUser(user: User): User = {
+    dbConfig.db.run(
+      insertUserQuery += user
+    ).futureValue
+  }
+
+  private val insertArticleQuery = articles returning articles.map(_.id) into ((item, id) => item.copy(id = Some(id)))
   def addArticle(article:Article): Article = {
     dbConfig.db.run(
-      insertQuery += article
+      insertArticleQuery += article
     ).futureValue
   }
 }

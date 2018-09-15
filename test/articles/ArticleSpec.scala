@@ -13,7 +13,7 @@ class ArticleSpec extends PlaySpec with MustMatchers{
     "translate correctly" in {
       val updated = DateTime.now().plusDays(4)
       val created = DateTime.now()
-      val article = Article(Some(3), "title", "text", Some(updated), Some(created))
+      val article = Article(Some(3), "title", "text", Some(1), Some(updated), Some(created))
 
       val result = article.toViewModel(ANY_USER)
 

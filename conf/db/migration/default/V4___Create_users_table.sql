@@ -7,7 +7,7 @@ create table users (
 );
 
 alter table articles
-  add column fk_user integer references articles(id) on delete restrict;
+  add column fk_user integer references users(id) on delete restrict;
 
 insert into users(name, email)
 values('admin', 'admin@quick.com');

@@ -1,0 +1,8 @@
+@import users.User
+@(blogTitle: String, user: Option[User])
+<header>
+    <div class="header-content">
+        <span class="title">@blogTitle</span>
+        <span class="user">@user.map(u => u.name).getOrElse("log in")</span>
+    </div>
+</header>

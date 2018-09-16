@@ -1,9 +1,13 @@
 
-body {
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.content-wrapper {
     width: 800px;
     margin: auto;
 }
-
 .article-list {
     margin-top: 10px;
     padding: 10px;
@@ -22,4 +26,24 @@ body {
     margin-top: 20px;
     border-radius: 10px;
     padding: 15px;
+}
+
+header {
+    width: 100%;
+    min-height: 30px;
+    background-color: black;
+    color: lightgray;
+}
+
+.header-content {
+    margin: auto;
+    padding: 20px;
+}
+
+header .title {
+}
+
+header .user {
+  float: right;
+    margin-right: 20px;
 }

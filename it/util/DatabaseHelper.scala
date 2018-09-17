@@ -17,7 +17,13 @@ trait DatabaseHelper extends ScalaFutures with ArticlesQuery with UsersQuery{
     ).futureValue
 
     System.out.println(s"Removed ${deletedArticles} articles.")
-  }
+
+    val deletedUsers = dbConfig.db.run(
+      users.delete
+    ).futureValue
+
+    System.out.println(s"Removed ${deletedUsers} users.")
+   }
 
   private val insertUserQuery = users returning users.map(_.id) into ((item, id) => item.copy(id = Some(id)))
   def addUser(user: User): User = {

@@ -41,6 +41,7 @@ class ArticlesRepositorySpec extends PlaySpec
     cut = injector.instanceOf(classOf[ArticlesRepository])
 
     databaseConfigProvider = injector.instanceOf(classOf[DatabaseConfigProvider])
+    cleanDatabase
 
     userInDb = addUser(ANY_USER)
   }
@@ -61,6 +62,7 @@ class ArticlesRepositorySpec extends PlaySpec
 
     "return all articles" in {
       cleanDatabase
+      userInDb = addUser(ANY_USER)
 
       val allArticles = Seq(ANY_ARTICLE.copy(title = "title 1", userId = userInDb.id),
                             ANY_ARTICLE.copy(title = "title 2", userId = userInDb.id),

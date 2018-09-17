@@ -60,3 +60,24 @@ header .user {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+.login-inner {
+    display: block;
+}
+
+fieldset {
+    border: none;
+}
+
+fieldset .field {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%
+    display: block;
+}
+
+
+.field input {
+    width: 100%;
+    box-sizing: border-box;
+}

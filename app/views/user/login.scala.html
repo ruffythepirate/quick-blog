@@ -1,8 +1,17 @@
 @main("Login") {
     <div class="login">
-        <form>
-            <span>email</span>
-            <input type="text" name="email"/>
-        </form>
+        <div class="login-inner">
+            <form>
+                <fieldset>
+                    <div class="field">
+                        <input type="text" placeholder="email" name="email"/>
+                    </div>
+                    <div class="field">
+                        <input type="password" placeholder="password" name="password"/>
+                    </div>
+                    <button>login</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
 }

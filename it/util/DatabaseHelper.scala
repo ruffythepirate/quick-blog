@@ -3,7 +3,7 @@ package util
 import articles.{Article, ArticlesQuery}
 import org.scalatest.concurrent.ScalaFutures
 import slick.basic.DatabaseConfig
-import users.{User, UsersQuery}
+import user.{User, UsersQuery}
 
 trait DatabaseHelper extends ScalaFutures with ArticlesQuery with UsersQuery{
    def dbConfig: DatabaseConfig[Nothing]

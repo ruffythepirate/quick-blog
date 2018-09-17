@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import org.joda.time.DateTime
 import play.api.db.slick.DatabaseConfigProvider
 import slick.basic.DatabaseConfig
-import users.{User, UsersQuery}
+import user.{User, UsersQuery}
 
 import scala.concurrent.{ExecutionContext, Future}
 

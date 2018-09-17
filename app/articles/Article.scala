@@ -1,7 +1,7 @@
 package articles
 
 import org.joda.time.DateTime
-import users.User
+import user.User
 
 case class Article(id: Option[Int], title: String, text: String, userId: Option[Int], updated: Option[DateTime], created: Option[DateTime]) {
   def toViewModel(user: User): ArticleViewModel = {

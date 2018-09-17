@@ -1,7 +1,7 @@
 package util
 
 import articles.Article
-import users.User
+import user.User
 
 trait TestData {
 

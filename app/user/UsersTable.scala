@@ -1,4 +1,4 @@
-package users
+package user
 
 import slick.lifted.{ProvenShape, Tag}
 import slick.jdbc.PostgresProfile.api._

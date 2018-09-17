@@ -6,7 +6,11 @@ import play.api.mvc.{AbstractController, AnyContent, ControllerComponents, Reque
 
 import scala.concurrent.ExecutionContext
 
-class ArticlesController @Inject()(cc: ControllerComponents, articlesRepository: ArticlesRepository, markdownService: MarkdownService)(implicit ec: ExecutionContext) extends AbstractController(cc) {
+class ArticlesController @Inject()
+(cc: ControllerComponents,
+ articlesRepository: ArticlesRepository,
+ markdownService: MarkdownService)
+(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
   def showArticle(articleId: Int) = Action.async { implicit request: Request[AnyContent] =>
     articlesRepository.selectArticle(articleId)

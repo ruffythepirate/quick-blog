@@ -3,7 +3,7 @@ package articles
 import org.joda.time.DateTime
 import org.scalatest.{FunSuite, MustMatchers}
 import org.scalatestplus.play.PlaySpec
-import users.User
+import user.User
 
 class ArticleSpec extends PlaySpec with MustMatchers{
 

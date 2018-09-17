@@ -9,7 +9,7 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.test.Injecting
 import slick.basic.DatabaseConfig
-import users.User
+import user.User
 import util.{DatabaseHelper, TestData}
 
 class ArticlesRepositorySpec extends PlaySpec

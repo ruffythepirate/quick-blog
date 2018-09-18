@@ -5,10 +5,10 @@ import play.api.db.slick.DatabaseConfigProvider
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class UserRepository @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
-                               (implicit ec: ExecutionContext)
-  extends UsersQuery
-{
+class UserRepository @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
+                              (implicit ec: ExecutionContext)
+  extends UsersQuery {
+
   import slick.jdbc.PostgresProfile.api._
 
   def getUser(email: String): Future[User] = {
@@ -19,4 +19,10 @@ class UserRepository @Inject() (protected val dbConfigProvider: DatabaseConfigPr
     )
   }
 
+  def verifyCredentials(userCredentials: UserCredentials): Future[Boolean] = {
+    dbConfigProvider.get.db.run(
+      users.filter(u => u.email === userCredentials.email)
+        .result.headOption
+    ).map(result => result.exists(u => u.password == userCredentials.password))
+  }
 }

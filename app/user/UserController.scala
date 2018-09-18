@@ -14,4 +14,9 @@ extends AbstractController(cc) {
 
       Ok(views.html.user.login())
   }
+
+  def login(credentials: UserCredentials) = Action.async {
+      implicit request: Request[AnyContent] =>
+      ???
+  }
 }

@@ -7,7 +7,7 @@ import user.User
 
 class ArticleSpec extends PlaySpec with MustMatchers{
 
-  val ANY_USER = User(Some(1), "name", "email")
+  val ANY_USER = User(Some(1), "name", "email", "password", None)
 
   "Article.toViewModel" should {
     "translate correctly" in {

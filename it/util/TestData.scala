@@ -5,7 +5,7 @@ import user.User
 
 trait TestData {
 
-  val ANY_USER = User(None, "name", "email")
+  val ANY_USER = User(None, "name", "email", "password", None)
 
   val ANY_ARTICLE = Article(None, "title", "text", None, None, None)
 }

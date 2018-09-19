@@ -3,7 +3,7 @@ package util
 import articles.{Article, ArticlesQuery}
 import org.scalatest.concurrent.ScalaFutures
 import slick.basic.DatabaseConfig
-import user.{User, UsersQuery}
+import user.{UserWithCredentials, UsersQuery}
 
 trait DatabaseHelper extends ScalaFutures with ArticlesQuery with UsersQuery{
    def dbConfig: DatabaseConfig[Nothing]
@@ -26,7 +26,7 @@ trait DatabaseHelper extends ScalaFutures with ArticlesQuery with UsersQuery{
    }
 
   private val insertUserQuery = users returning users.map(_.id) into ((item, id) => item.copy(id = Some(id)))
-  def addUser(user: User): User = {
+  def addUser(user: UserWithCredentials): UserWithCredentials = {
     dbConfig.db.run(
       insertUserQuery += user
     ).futureValue

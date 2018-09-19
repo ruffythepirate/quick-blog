@@ -20,7 +20,7 @@ class UserRepositorySpec extends PlaySpec
   with DatabaseHelper {
 
   var cut: UserRepository = _
-  var userInDb: User = _
+  var userInDb: UserWithCredentials = _
 
   implicit val defaultPatience =
     PatienceConfig(timeout = Span(3, Seconds), interval = Span(5, Millis))
@@ -47,40 +47,13 @@ class UserRepositorySpec extends PlaySpec
     cleanDatabase
   }
 
-  "UserRepository.getUser" should {
+  "UserRepository.getUserWithCredentials" should {
     "get a user based on email" in {
       userInDb = addUser(ANY_USER.copy(email = "cool email"))
-      val readUser = cut.getUser(userInDb.email).futureValue
+      val readUser = cut.getUserWithCredentials(userInDb.email).futureValue
 
-     readUser must equal (userInDb)
-    }
-  }
-
-  "UserRepository.verifyCredentials" should {
-    "return false" when {
-      "no user found" in {
-        val result = cut.verifyCredentials(UserCredentials("unknown", "")).futureValue
-
-        result must equal(false)
-      }
-
-      "credentials don't match" in {
-        addUser(ANY_USER.copy(email = "hello", password = "secret"))
-
-        val result = cut.verifyCredentials(UserCredentials("hello", "wrong secret")).futureValue
-
-        result must equal(false)
-      }
-    }
-
-    "return true" when {
-      "credentials match" in {
-        addUser(ANY_USER.copy(email = "hello", password = "secret"))
-
-        val result = cut.verifyCredentials(UserCredentials("hello", "secret")).futureValue
-
-        result must equal(true)
-      }
+      readUser must equal(Some(userInDb))
     }
   }
 }
+

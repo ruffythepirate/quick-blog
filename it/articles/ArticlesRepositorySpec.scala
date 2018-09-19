@@ -9,7 +9,7 @@ import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.test.Injecting
 import slick.basic.DatabaseConfig
-import user.User
+import user.UserWithCredentials
 import util.{DatabaseHelper, TestData}
 
 class ArticlesRepositorySpec extends PlaySpec
@@ -24,7 +24,7 @@ class ArticlesRepositorySpec extends PlaySpec
   var cut: ArticlesRepository = _
 
   val ANY_DATE = DateTime.now()
-  var userInDb:User = _
+  var userInDb:UserWithCredentials = _
 
   implicit val defaultPatience =
     PatienceConfig(timeout =  Span(3, Seconds), interval = Span(5, Millis))

@@ -11,18 +11,11 @@ class UserRepository @Inject()(protected val dbConfigProvider: DatabaseConfigPro
 
   import slick.jdbc.PostgresProfile.api._
 
-  def getUser(email: String): Future[User] = {
+  def getUserWithCredentials(email: String): Future[Option[UserWithCredentials]] = {
     val dbConfig = dbConfigProvider.get
 
     dbConfig.db.run(
-      users.filter(u => u.email === email).result.head
+      users.filter(u => u.email === email).result.headOption
     )
-  }
-
-  def verifyCredentials(userCredentials: UserCredentials): Future[Boolean] = {
-    dbConfigProvider.get.db.run(
-      users.filter(u => u.email === userCredentials.email)
-        .result.headOption
-    ).map(result => result.exists(u => u.password == userCredentials.password))
   }
 }

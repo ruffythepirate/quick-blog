@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import org.joda.time.DateTime
 import play.api.db.slick.DatabaseConfigProvider
 import slick.basic.DatabaseConfig
-import user.{User, UsersQuery}
+import user.{UserWithCredentials, UsersQuery}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -19,7 +19,7 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
         (a, u) <- articles join users on (_.userId === _.id)
       } yield (a, u)
 
-  def selectMapping(article: Article, user: User) = {
+  def selectMapping(article: Article, user: UserWithCredentials) = {
     article.toViewModel(user)
   }
 
@@ -37,7 +37,7 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
 
     dbConfig.db.run(
       selectQuery.filter{case (article,_) => article.id === id}.result.head
-    ).map { case (article: Article, user: User) => selectMapping(article, user) }
+    ).map { case (article: Article, user: UserWithCredentials) => selectMapping(article, user) }
   }
 
   def selectAll(): Future[Seq[ArticleViewModel]] = {
@@ -46,7 +46,7 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
 
    dbConfig.db.run(
       selectQuery.result
-    ).map(result => result.map{case(article:Article, user:User)=>selectMapping(article, user)})
+    ).map(result => result.map{case(article:Article, user:UserWithCredentials)=>selectMapping(article, user)})
   }
 
 }

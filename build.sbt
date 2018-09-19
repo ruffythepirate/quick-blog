@@ -23,6 +23,10 @@ javaSource in ITest := baseDirectory.value / "/it"
 resourceDirectory in ITest := baseDirectory.value / "/it/resources"
 scalaSource in ITest := baseDirectory.value / "/it"
 
+unmanagedSourceDirectories in Test += baseDirectory.value / "testCommon"
+unmanagedSourceDirectories in ITest += baseDirectory.value / "testCommon"
+
+
 lazy val testDependencies = Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2",
   "org.mockito" % "mockito-core" % "2.7.19",

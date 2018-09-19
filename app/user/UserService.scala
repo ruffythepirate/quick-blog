@@ -2,9 +2,16 @@ package user
 
 import com.google.inject.Inject
 
-class UserService @Inject() (userRepository: UserRepository) {
+import scala.concurrent.{ExecutionContext, Future}
 
-  def verifyCredentials(userCredentials: UserCredentials): Boolean = {
-   ???
+class UserService @Inject()(userRepository: UserRepository)(implicit ec: ExecutionContext) {
+
+  def verifyCredentials(userCredentials: UserCredentials): Future[Boolean] = {
+    userRepository.getUserWithCredentials(userCredentials.email)
+      .map(userOpt => {
+        userOpt.exists(user => {
+          user.password == userCredentials.password
+        })
+      })
   }
 }

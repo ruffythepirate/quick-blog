@@ -3,11 +3,11 @@ package articles
 import org.joda.time.DateTime
 import org.scalatest.{FunSuite, MustMatchers}
 import org.scalatestplus.play.PlaySpec
-import user.User
+import user.UserWithCredentials
 
 class ArticleSpec extends PlaySpec with MustMatchers{
 
-  val ANY_USER = User(Some(1), "name", "email", "password", None)
+  val ANY_USER = UserWithCredentials(Some(1), "name", "email", "password", None)
 
   "Article.toViewModel" should {
     "translate correctly" in {

@@ -2,18 +2,17 @@ package articles
 
 import markdown.MarkdownService
 import org.joda.time.DateTime
-import org.scalatest.BeforeAndAfter
-import org.scalatestplus.play.PlaySpec
-import org.scalatest.mockito.MockitoSugar
-import play.api.http.HttpVerbs
-import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 import org.mockito.Mockito._
+import org.scalatest.BeforeAndAfter
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.mockito.MockitoSugar
 import org.scalatest.time.{Millis, Seconds, Span}
+import org.scalatestplus.play.PlaySpec
+import play.api.http.HttpVerbs
 import play.api.mvc.Results
 import play.api.test.Helpers._
-import play.api.test._
+import play.api.test.{FakeRequest, StubControllerComponentsFactory}
 
 import scala.concurrent.Future
 
@@ -30,7 +29,6 @@ class ArticlesControllerSpec extends PlaySpec with BeforeAndAfter with MockitoSu
   var markdownService: MarkdownService = _
 
   var ANY_ARTICLE = ArticleViewModel(1, "Title of article", "Text of article", "author", DateTime.now)
-
 
   before {
     articlesRepository = mock[ArticlesRepository]

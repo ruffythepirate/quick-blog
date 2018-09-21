@@ -23,9 +23,11 @@ class UsersTable (tag: Tag)
 
   def password: Rep[String] = column[String]("password")
 
+  def salt: Rep[String] = column[String]("salt")
+
   def lastLogin: Rep[DateTime] = column[DateTime]("last_login")
 
-  def * : ProvenShape[UserWithCredentials] = (id.?, name, email, password, lastLogin.?) <> (UserWithCredentials.tupled, UserWithCredentials.unapply)
+  def * : ProvenShape[UserWithCredentials] = (id.?, name, email, password, salt, lastLogin.?) <> (UserWithCredentials.tupled, UserWithCredentials.unapply)
 }
 
 trait UsersQuery {

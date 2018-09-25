@@ -3,6 +3,11 @@
 <header>
     <div class="header-content">
         <span class="title">@blogTitle</span>
-        <span class="user">@user.map(u => u.name).getOrElse("log in")</span>
+        <span class="user">@if(user.nonEmpty) {
+            @user.map(u => u.name)
+        } else {
+            <a href="/user/login">log in</a>
+        }
+        </span>
     </div>
 </header>

@@ -30,6 +30,7 @@ unmanagedSourceDirectories in ITest += baseDirectory.value / "testCommon"
 lazy val testDependencies = Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2",
   "org.mockito" % "mockito-core" % "2.7.19",
+  "org.mockito" % "mockito-core" % "2.7.19",
    "com.whisk" %% "docker-testkit-scalatest" % "0.9.5",
    "com.whisk" %% "docker-testkit-impl-spotify" % "0.9.5"
 )

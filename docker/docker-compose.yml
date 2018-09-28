@@ -1,0 +1,8 @@
+version: '3'
+services:
+    web:
+      image: "quick-blog:latest"
+      ports:
+        - "8080:8080"
+    db:
+      image: "postgres:9.6.3"

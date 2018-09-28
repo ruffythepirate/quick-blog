@@ -52,3 +52,11 @@ libraryDependencies ++= testDependencies.map(d => d % "test,it")
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "de.ruffy.binders._"
+
+mainClass in Compile := Some("play.core.server.ProdServerStart")
+dockerBaseImage := "openjdk:jre-alpine"
+version in Docker := "latest"
+
+enablePlugins(JavaAppPackaging)
+enablePlugins(DockerPlugin)
+enablePlugins(AshScriptPlugin)

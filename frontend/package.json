@@ -1,0 +1,30 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "This contains frontend components that can be used for the quick blog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    }
+  },
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "marked": "^0.5.1"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "vue": "^2.5.17",
+    "vue-jest": "^2.6.0",
+    "vue-template-compiler": "^2.5.17"
+  }
+}

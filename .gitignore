@@ -4,6 +4,7 @@
 .ensime_cache
 /db
 .eclipse
+/frontend/node_modules
 /lib/
 /logs/
 /modules

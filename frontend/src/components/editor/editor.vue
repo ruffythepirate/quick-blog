@@ -1,6 +1,6 @@
 <template>
   <div class="article-editor" id="editor">
-    <textarea :value="input" @input="update"></textarea>
+    <textarea v-model="input" @input="update()"></textarea>
     <div v-html="compiledMarkdown"></div>
   </div>
 </template>
@@ -10,20 +10,25 @@
     const debounce = require('lodash/debounce');
     const marked = require('marked');
 
-    module.export = {
-        el: '#editor',
-        data: {
-            input: '# hello'
+    export default {
+        // el: '#editor',
+        data: function () {
+            return {
+                input: '# hello'
+            };
+        },
+        methods: {
+            update: function () {
+                console.log('Im now calling debounce: ', debounce)
+                debounce(function (e) {
+                    this.input = e.target.value
+                }, 300)
+            }
         },
         computed: {
             compiledMarkdown: function () {
                 return marked(this.input, {sanitize: true})
             }
-        },
-        methods: {
-            update: debounce(function (e) {
-                this.input = e.target.value
-            }, 300)
         }
     }
 </script>

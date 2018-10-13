@@ -4,7 +4,10 @@
   "description": "This contains frontend components that can be used for the quick blog.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "webpack",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "lint": "node_modules/eslint/bin/eslint.js ."
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +17,8 @@
       "vue"
     ],
     "transform": {
-      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
+      "^.+\\.js$": "babel-jest"
     }
   },
   "dependencies": {
@@ -22,9 +26,21 @@
     "marked": "^0.5.1"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-vue": "^5.0.0-beta.3",
     "jest": "^23.6.0",
     "vue": "^2.5.17",
     "vue-jest": "^2.6.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   }
 }

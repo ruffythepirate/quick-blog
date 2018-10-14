@@ -2,21 +2,20 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/articleEditor.js',
+  entry: {
+    articleEditor: './src/articleEditor.js'
+  },
+  output: {
+    filename: '[name].js'
+  },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
-      {
-        enforce: 'pre',
-        test: /\.vue$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /(\.js$|\.vue$)/,
+      //   exclude: [/node_modules/, /dist/],
+      //   loader: 'eslint-loader',
+      // },
       {
         test: /\.vue$/,
         loader: 'vue-loader',

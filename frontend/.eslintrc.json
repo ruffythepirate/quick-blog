@@ -1,5 +1,5 @@
 {
-  "plugins": ["jest"],
+  "plugins": ["jest", "html"],
   "env": {
     "browser": true,
     "es6": true,
@@ -11,6 +11,8 @@
   },
   "extends": [
     "airbnb-base"
-    ],
-  "rules": {}
+  ],
+  "rules": {
+    "indent": ["error", 2]
+  }
 }

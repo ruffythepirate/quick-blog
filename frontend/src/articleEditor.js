@@ -1,1 +1,1 @@
-import { editor } from './components/editor.vue';
+require('./components/editor/editor.vue');

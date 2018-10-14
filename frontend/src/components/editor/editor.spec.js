@@ -16,9 +16,6 @@ describe('editor', () => {
     },
   );
 
-  beforeEach(() => {
-  });
-
   it('renders the input data', () => {
     const wrapper = factory({ input: 'hello world' });
 
@@ -35,6 +32,12 @@ describe('editor', () => {
   });
 
   it('renders markdown when debounce method is called', () => {
+    const wrapper = factory();
 
+    const textarea = wrapper.find(TEXT_AREA_SELECTOR);
+    textarea.setValue('new value');
+
+    debounceMock.mock.calls[0][0]({target:{value:'new value'}});
+    expect(wrapper.find('.compiled-view').text()).toBe('new value');
   });
 });

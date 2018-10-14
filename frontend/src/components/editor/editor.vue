@@ -1,36 +1,35 @@
 <template>
   <div class="article-editor" id="editor">
     <textarea v-model="input" @input="update()"></textarea>
-    <div v-html="compiledMarkdown"></div>
+    <div class="compiled-view" v-html="compiledMarkdown"></div>
   </div>
 </template>
 
 <script>
 
-    const debounce = require('lodash/debounce');
-    const marked = require('marked');
+  const debounce = require('lodash/debounce');
+  const marked = require('marked');
 
-    export default {
-        // el: '#editor',
-        data: function () {
-            return {
-                input: '# hello'
-            };
-        },
-        methods: {
-            update: function () {
-                console.log('Im now calling debounce: ', debounce)
-                debounce(function (e) {
-                    this.input = e.target.value
-                }, 300)
-            }
-        },
-        computed: {
-            compiledMarkdown: function () {
-                return marked(this.input, {sanitize: true})
-            }
-        }
+  export default {
+    // el: '#editor',
+    data: function () {
+      return {
+        input: '# hello'
+      };
+    },
+    methods: {
+      update: function () {
+        debounce(function (e) {
+          this.input = e.target.value
+        }, 300)
+      }
+    },
+    computed: {
+      compiledMarkdown: function () {
+        return marked(this.input, {sanitize: true})
+      }
     }
+  }
 </script>
 
 <style>

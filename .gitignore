@@ -10,6 +10,7 @@
 /modules
 /project/project
 /project/target
+/public/javascripts/vue/dist
 /target
 tmp/
 test-result

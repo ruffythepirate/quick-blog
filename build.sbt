@@ -1,9 +1,36 @@
+import java.nio.file.{CopyOption, FileVisitOption, Files, StandardCopyOption}
+import java.util.function.BiPredicate
+
+import org.apache.commons.io.FileUtils
 
 version := "1.0-SNAPSHOT"
 
+lazy val buildFrontend = taskKey[Unit]("Build frontend components")
+buildFrontend := {
+  import scala.sys.process._
+
+  val projectPath = baseDirectory.value
+  Process("yarn build", projectPath / "frontend") !
+}
+
+lazy val copyFrontend = taskKey[Unit]("Copy frontend components")
+copyFrontend := {
+  val projectPath = baseDirectory.value
+
+  val distPath =projectPath / "frontend" / "dist"
+  val targetPath = projectPath / "public" / "javascripts" / "vue" / "dist"
+
+  System.out.println(s"Copying frontend resources into ${targetPath.toPath}")
+  FileUtils.copyDirectory(distPath, targetPath)
+  System.out.println(s"File copy is finished.")
+
+  val numberOfFiles = FileUtils.listFiles(targetPath, Array("js"), true).size()
+  System.out.println(s"$numberOfFiles  files have been copied!")
+}
+
+(Compile / compile) := ((Compile / compile) dependsOn copyFrontend dependsOn buildFrontend).value
 
 lazy val commonSettings = Seq(
-
   scalaVersion := "2.12.6",
     name := """quick-blog""",
     organization := "de.ruffy"

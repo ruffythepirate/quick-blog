@@ -2,6 +2,16 @@
 
 This is blog project implemented to learn more about play and scala.
 
+# Prerequisites
+
+* Yarn (has been developed with v1.10)
+* SBT (is being developed with v1.2.1)
+* Docker
+
+# Commands
+
+* sbt run (make sure that `/bin/start-db.sh` has been executed first.)
+
 # Testing
 
 ## Integration Tests

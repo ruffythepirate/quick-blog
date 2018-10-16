@@ -46,4 +46,26 @@ class ArticlesControllerSpec extends PlaySpec
       }
     }
   }
+
+  "ArticleController.createArticle() GET" should {
+    "return a article creator" in {
+        val controller = inject[ArticlesController]
+        val home = controller.createArticle().apply(FakeRequest(GET, "/"))
+        status(home) mustBe OK
+        contentType(home) mustBe Some("text/html")
+      contentAsString(home) must include("articleId: undefined")
+    }
+  }
+
+  "ArticleController.editArticle(id) GET" should {
+    "render edit article page" in {
+      val articleId = 3
+         val controller = inject[ArticlesController]
+        val home = controller.editArticle(articleId).apply(FakeRequest(GET, "/"))
+
+        status(home) mustBe OK
+        contentType(home) mustBe Some("text/html")
+        contentAsString(home) must include("articleId: 3")
+    }
+  }
 }

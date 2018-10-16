@@ -24,4 +24,13 @@ class ArticlesController @Inject()
 
     articles.map(articles => Ok(views.html.articles.articleList(articles)))
   }
+
+  def createArticle() = Action {  request: Request[AnyContent] =>
+    Ok(views.html.articles.articleEditor(None))
+  }
+
+  def editArticle(articleId: Int) = Action { request: Request[AnyContent] =>
+    Ok(views.html.articles.articleEditor(Some(articleId)))
+  }
+
 }

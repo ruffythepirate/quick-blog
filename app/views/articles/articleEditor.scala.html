@@ -1,14 +1,15 @@
 @import _root_.articles.Article
 
-@(article: Option[Article])
+@(articleId: Option[Int])
 
-@main("edit article") {
+@main("Article Editor") {
+    <script type="application/javascript">
+        window.QB = {
+          articleId: @articleId.map(id => id.toString).getOrElse("undefined")
+        }
+    </script>
 
-    <script src="https://unpkg.com/marked@@0.3.6"></script>
-    <script src="https://unpkg.com/lodash@@4.16.0"></script>
+    <div id="article-editor"></div>
 
-    <div id="editor">
-        <textarea :value="input" @@input="update"></textarea>
-        <div v-html="compiledMarkdown"></div>
-    </div>
+    <script src="@routes.Assets.versioned("javascripts/vue/dist/articleEditor.js")" type="application/javascript"></script>
 }

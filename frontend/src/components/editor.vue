@@ -11,7 +11,6 @@
   const marked = require('marked');
 
   export default {
-    // el: '#editor',
     data: function () {
       return {
         input: '# hello'

@@ -7,8 +7,8 @@
 GET     /                           articles.ArticlesController.showAllArticles()
 GET     /article/:id                articles.ArticlesController.showArticle(id: Int)
 
-GET     /article/editor/            articles.ArticlesController.createArticle()
-GET     /article/editor/:id         articles.ArticlesController.editArticle(id: Int)
+GET     /admin/article/editor/            articles.ArticlesController.createArticle()
+GET     /admin/article/editor/:id         articles.ArticlesController.editArticle(id: Int)
 
 # User management
 GET /user/login                     user.UserController.showLogin()

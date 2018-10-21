@@ -2,7 +2,7 @@
 
 @(articleId: Option[Int])
 
-@main("Article Editor") {
+@base("Article Editor") {
     <script type="application/javascript">
         window.QB = {
           articleId: @articleId.map(id => id.toString).getOrElse("undefined")

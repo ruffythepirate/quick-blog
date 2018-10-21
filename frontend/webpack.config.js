@@ -21,12 +21,12 @@ module.exports = {
         loader: 'vue-loader',
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        test: /\.css$/,
+        loader: ['vue-style-loader', 'css-loader'],
       },
       {
-        test: /\.css$/,
-        loader: 'css-loader',
+        test: /\.js$/,
+        loader: 'babel-loader',
       },
     ],
   },

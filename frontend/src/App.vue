@@ -1,9 +1,12 @@
+<template>
+  <markdown-editor></markdown-editor>
+</template>
 <script>
-  import editor from './components/editor.vue';
+  import MarkdownEditor from './components/MarkdownEditor.vue';
 
   export default {
     components: {
-      editor
+      MarkdownEditor
     }
   }
 </script>

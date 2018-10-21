@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import cut from './editor.vue';
+import cut from './MarkdownEditor.vue';
 
 jest.mock('lodash/debounce', () => jest.fn());
 const debounceMock = require('lodash/debounce');
 
-const TEXT_AREA_SELECTOR = '#editor textarea';
+const TEXT_AREA_SELECTOR = '#MarkdownEditor textarea';
 
 describe('editor', () => {
   const factory = (values = {}) => shallowMount(

@@ -1,6 +1,6 @@
 <template>
   <div class="article-editor" id="editor">
-    <textarea v-model="input" @input="update()"></textarea>
+    <textarea v-focus v-model="input" @input="update()"></textarea>
     <div class="compiled-view" v-html="compiledMarkdown"></div>
   </div>
 </template>

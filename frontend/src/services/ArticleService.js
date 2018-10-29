@@ -5,18 +5,17 @@ function createArticle(article) {
     article);
 }
 
-function updateArticle(article){
+function updateArticle(article) {
   return axios.put(`/api/articles/${article.id}`,
     article);
 }
 
 
 export default {
-  saveOrUpdateArticle: function(article) {
-    if(article.id) {
+  saveOrUpdateArticle(article) {
+    if (article.id) {
       return updateArticle(article);
-    } else {
-      return createArticle(article);
     }
-  }
-}
+    return createArticle(article);
+  },
+};

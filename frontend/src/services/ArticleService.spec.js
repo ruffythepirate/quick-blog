@@ -11,7 +11,7 @@ describe('ArticleService', () => {
 
   it('should update article if article has id', () => {
     const article = {
-      id: 'my-id'
+      id: 'my-id',
     };
     articleService.saveOrUpdateArticle(article);
 

@@ -11,7 +11,7 @@ describe('editor', () => {
 
   it('renders the input data', () => {
     const wrapper = factory();
-    wrapper.setData({value: 'hello world'});
+    wrapper.setData({ value: 'hello world' });
 
     expect(wrapper.find(TEXT_AREA_SELECTOR).element.value).toEqual('hello world');
   });

@@ -1,5 +1,5 @@
 export default {
-  inserted: function(el) {
+  inserted(el) {
     el.focus();
-  }
+  },
 };

@@ -8,7 +8,8 @@
     "dev:article-editor": "webpack-dev-server --config build/webpack.config.dev.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "lint": "node_modules/eslint/bin/eslint.js src"
+    "lint": "node_modules/eslint/bin/eslint.js src",
+    "clean": "rm -rf ./dist"
   },
   "author": "",
   "license": "ISC",

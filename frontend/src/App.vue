@@ -1,18 +1,16 @@
 <template>
-  <markdown-editor></markdown-editor>
+  <div id="vue-application">
+    <article-editor></article-editor>
+  </div>
 </template>
 
 <script>
-  import MarkdownEditor from './components/MarkdownEditor.vue';
-  import Vue from 'vue';
-  import focus from './directives/FocusDirective';
-
-  Vue.directive('focus', focus);
+  import ArticleEditor from './components/ArticleEditor/ArticleEditor.vue';
 
   export default {
     components: {
-      MarkdownEditor
-    }
-  }
+      ArticleEditor,
+    },
+  };
 </script>
 

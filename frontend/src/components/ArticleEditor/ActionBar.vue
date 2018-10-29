@@ -1,26 +1,27 @@
 <template>
   <div class="action-bar">
-    <button class="submit" @click="save">Save</button>
+    <div class="wrapper">
+      <button class="submit" @click="save">Save</button>
+    </div>
   </div>
 
 </template>
 
 <script>
 
-  const articleService = require('../../services/ArticleService');
+  import articleService from '../../services/ArticleService';
 
   export default {
     props: ['article'],
     methods: {
-      save: () => {
-        articleService.saveOrUpdateArticle(this.article).then(function (savedArticle) {
+      save() {
+        articleService.saveOrUpdateArticle(this.article).then((savedArticle) => {
           this.article.id = savedArticle.id;
-        }.bind(this));
-      }
-    }
-  }
+        });
+      },
+    },
+  };
 </script>
 
 <style>
-
 </style>

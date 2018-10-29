@@ -1,31 +1,40 @@
 <template>
   <div class="article-editor" id="editor">
-    <textarea v-focus v-model="input" @input="update()"></textarea>
+    <textarea v-focus v-model="value" @input="update()"></textarea>
     <div class="compiled-view" v-html="compiledMarkdown"></div>
   </div>
 </template>
 
 <script>
+  import focus from '../directives/FocusDirective';
 
   const debounce = require('lodash/debounce');
   const marked = require('marked');
 
+
   export default {
-    data: function () {
-      return {
-        input: '# hello'
-      };
+    directives: {
+      focus
+    },
+    props: {
+      value: {
+        type: String,
+        default: ''
+      }
     },
     methods: {
       update: function () {
         debounce(function (e) {
-          this.input = e.target.value
+          this.value = e.target.value
         }, 300)
       }
     },
     computed: {
       compiledMarkdown: function () {
-        return marked(this.input, {sanitize: true})
+        if (this.value) {
+          return marked(this.value, {sanitize: true})
+        }
+        return '';
       }
     }
   }

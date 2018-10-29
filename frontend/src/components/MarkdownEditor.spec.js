@@ -4,20 +4,14 @@ import cut from './MarkdownEditor.vue';
 jest.mock('lodash/debounce', () => jest.fn());
 const debounceMock = require('lodash/debounce');
 
-const TEXT_AREA_SELECTOR = '#MarkdownEditor textarea';
+const TEXT_AREA_SELECTOR = 'textarea';
 
 describe('editor', () => {
-  const factory = (values = {}) => shallowMount(
-    cut,
-    {
-      data() {
-        return { ...values };
-      },
-    },
-  );
+  const factory = () => shallowMount(cut);
 
   it('renders the input data', () => {
-    const wrapper = factory({ input: 'hello world' });
+    const wrapper = factory();
+    wrapper.setData({value: 'hello world'});
 
     expect(wrapper.find(TEXT_AREA_SELECTOR).element.value).toEqual('hello world');
   });

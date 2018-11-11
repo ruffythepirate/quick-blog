@@ -11,6 +11,6 @@ case class Article(id: Option[Int], title: String, text: String, userId: Option[
   }
 }
 
-object ArticleConverter extends JodaDateTimeJsonConverter {
+object ArticleFormat extends JodaDateTimeJsonConverter {
   implicit val format: Format[Article] = Json.format[Article]
 }

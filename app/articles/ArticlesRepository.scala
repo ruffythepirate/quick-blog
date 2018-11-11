@@ -31,6 +31,10 @@ class ArticlesRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
     )
   }
 
+  def updateArticle(id: Int, article: Article): Future[Article] = {
+    ???
+  }
+
   def selectArticle(id: Int): Future[ArticleViewModel] = {
     val dbConfig = dbConfigProvider.get
 

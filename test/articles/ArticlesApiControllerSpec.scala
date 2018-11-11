@@ -29,10 +29,10 @@ class ArticlesApiControllerSpec extends PlaySpec with BeforeAndAfter with Mockit
 
   var ANY_ARTICLE = Article(None, "Title of article", "Text of article", None, Some(DateTime.now), Some(DateTime.now))
 
+  val ANY_ARTICLE_ID = 1
+
   before {
     articlesRepository = mock[ArticlesRepository]
-    Mockito.when(articlesRepository.insertArticle(ANY_ARTICLE))
-      .thenReturn(Future.successful(ANY_ARTICLE))
     cut = new ArticlesApiController(stubControllerComponents(), articlesRepository)
   }
 
@@ -42,12 +42,28 @@ class ArticlesApiControllerSpec extends PlaySpec with BeforeAndAfter with Mockit
     "calling POST /api/articles" should {
 
       "create an article" in {
+        Mockito.when(articlesRepository.insertArticle(ANY_ARTICLE))
+          .thenReturn(Future.successful(ANY_ARTICLE))
         val request: Request[AnyContent] = FakeRequest("POST", "/api/articles")
           .withJsonBody(Json.toJson(ANY_ARTICLE))
 
         cut.createArticle().apply(request).futureValue
 
         Mockito.verify(articlesRepository).insertArticle(ANY_ARTICLE)
+      }
+    }
+
+    "calling PUT /api/articles/:id" should {
+
+      "update an article" in {
+        Mockito.when(articlesRepository.updateArticle(ANY_ARTICLE_ID, ANY_ARTICLE))
+          .thenReturn(Future.successful(ANY_ARTICLE))
+         val request: Request[AnyContent] = FakeRequest("PUT", "/api/articles/:id")
+          .withJsonBody(Json.toJson(ANY_ARTICLE))
+
+        cut.updateArticle(ANY_ARTICLE_ID).apply(request).futureValue
+
+        Mockito.verify(articlesRepository).updateArticle(ANY_ARTICLE_ID, ANY_ARTICLE)
       }
     }
   }

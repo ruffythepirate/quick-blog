@@ -12,11 +12,9 @@ class ArticlesApiController @Inject()
 (implicit ec: ExecutionContext) extends AbstractController(cc)
 {
 
+  implicit val articleFormat = ArticleConverter.format
 
   def createArticle() = Action.async { implicit request: Request[AnyContent] =>
-
-    implicit val articleFormat = ArticleConverter.format
-
     request.body.asJson match{
       case Some(json) => {
         json.validate[Article] match {
@@ -30,7 +28,22 @@ class ArticlesApiController @Inject()
       case None =>
         Future.successful(BadRequest)
     }
+  }
 
+  def updateArticle(id: Int) = Action.async { implicit request: Request[AnyContent] =>
+    request.body.asJson match{
+      case Some(json) => {
+        json.validate[Article] match {
+          case JsSuccess(article, _) =>
+            articlesRepository.updateArticle(id, article)
+              .map(_ => Ok)
+          case JsError(_) =>
+            Future.successful(BadRequest)
+        }
+      }
+      case None =>
+        Future.successful(BadRequest)
+    }
   }
 
 }

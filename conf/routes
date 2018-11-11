@@ -10,6 +10,10 @@ GET     /article/:id                articles.ArticlesController.showArticle(id: 
 GET     /admin/article/editor/            articles.ArticlesController.createArticle()
 GET     /admin/article/editor/:id         articles.ArticlesController.editArticle(id: Int)
 
+
+# API
+POST /api/articles                  articles.ArticlesApiController.createArticle()
+
 # User management
 GET /user/login                     user.UserController.showLogin()
 POST /user/login                     user.UserController.login()

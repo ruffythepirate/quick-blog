@@ -67,6 +67,7 @@ libraryDependencies += guice
 libraryDependencies += jdbc
 libraryDependencies += "org.postgresql" % "postgresql" % "42.2.4"
 libraryDependencies += "org.flywaydb" %% "flyway-play" % "5.0.0"
+libraryDependencies += "com.typesafe.play" %% "play-json-joda" % "2.6.10"
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "3.0.3"
 libraryDependencies += "com.atlassian.commonmark" % "commonmark" % "0.11.0"
 

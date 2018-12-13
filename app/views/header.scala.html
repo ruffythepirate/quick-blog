@@ -3,6 +3,7 @@
 <header>
     <div class="header-content">
         <span class="title">@blogTitle</span>
+        <span><a href="/admin/article/editor/">Editor</a></span>
         <span class="user">@if(user.nonEmpty) {
             @user.map(u => u.name)
         } else {

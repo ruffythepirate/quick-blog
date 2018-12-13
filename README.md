@@ -4,7 +4,6 @@ This is blog project implemented to learn more about play and scala.
 
 # Prerequisites
 
-* Yarn (has been developed with v1.10)
 * SBT (is being developed with v1.2.1)
 * Docker
 
@@ -19,7 +18,6 @@ This is blog project implemented to learn more about play and scala.
 * Run integration tests: `sbt it:test`
 * Run unit tests: `sbt unit:test`
 * Run all backend tests: `sbt unit:test`
-* Run frontend tests (see readme in frontend folder)
 
 ## Integration Tests
 

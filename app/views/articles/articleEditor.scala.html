@@ -49,6 +49,9 @@
     <script src="https://unpkg.com/lodash@@4.16.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@@2.5.13/dist/vue.js"></script>
 
+    <div id="menu-bar">
+       <button v-on:click="save()">Save</button>
+    </div>
     <div id="editor">
         <textarea :value="input" @@input="update"></textarea>
         <div v-html="compiledMarkdown"></div>
@@ -69,7 +72,10 @@
                 methods: {
                     update: _.debounce(function (e) {
                         this.input = e.target.value
-                    }, 300)
+                    }, 300),
+                    save: function() {
+                        console.log('saved post...')
+                    }
                 }
             })
     </script>

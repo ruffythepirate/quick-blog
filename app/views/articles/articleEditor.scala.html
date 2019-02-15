@@ -7,7 +7,7 @@
 @base("Article Editor") {
 
     <style>
-            html, body, #editor {
+            html, body, #editor, #container {
                 margin: 0;
                 height: 100%;
                 font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -49,18 +49,18 @@
     <script src="https://unpkg.com/lodash@@4.16.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@@2.5.13/dist/vue.js"></script>
 
-    <div id="menu-bar">
-       <button v-on:click="save()">Save</button>
+    <div id="container">
+        <div id="menu-bar">
+            <button v-on:click="save()">Save</button>
+        </div>
+        <div id="editor">
+            <textarea :value="input" @@input="update"></textarea>
+            <div v-html="compiledMarkdown"></div>
+        </div>
     </div>
-    <div id="editor">
-        <textarea :value="input" @@input="update"></textarea>
-        <div v-html="compiledMarkdown"></div>
-    </div>
-
-
     <script>
             new Vue({
-                el: '#editor',
+                el: '#container',
                 data: {
                     input: '# hello'
                 },

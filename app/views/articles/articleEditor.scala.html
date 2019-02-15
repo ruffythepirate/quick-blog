@@ -56,6 +56,7 @@
     <script src="https://unpkg.com/marked@@0.3.6"></script>
     <script src="https://unpkg.com/lodash@@4.16.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@@2.5.13/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@@1.5.1"></script>
 
     <div id="container">
         <div id="menu-bar">
@@ -93,7 +94,16 @@
                         const title = this.title;
                         const body = this.input;
                         this.feedback = 'Saving post...';
-                        console.log('saved post...', title, body);
+                        this.$http.post('/api/articles',
+                                {
+                                    title: title,
+                                    body: body
+                                })
+                                .then(function() {
+                                    this.feedback = 'saved!';
+                                }).catch(function() {
+                                    this.feedback = 'failed to save!';
+                        });
 
                     }
                 }

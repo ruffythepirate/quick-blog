@@ -12,7 +12,9 @@ GET     /admin/article/editor/:id         articles.ArticlesController.editArticl
 
 
 # API
+#NOCSRF
 POST /api/articles                  articles.ArticlesApiController.createArticle()
+#NOCSRF
 
 # User management
 GET /user/login                     user.UserController.showLogin()
